@@ -1,0 +1,28 @@
+from collections import Counter
+from aocd import get_data
+
+def solve(data, test=False):
+    if test:
+        print(data)
+
+
+def solve2(data, test=False):
+    if test:
+        print(data)
+
+
+def read_file():
+    data = []
+    with open('../data/{{day}}.in', 'r') as f:
+        return [list(l.split())for l in f.readlines()]
+
+
+if __name__ == '__main__':
+    data = read_file()
+    print("Testing data: ")
+    solve(data, test=True)
+    solve2(data, test=True)
+    data_real = get_data(day={{day}}, year=2024)
+    print("Real data: ")
+    solve(data)
+    solve2(data)
