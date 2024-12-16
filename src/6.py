@@ -65,7 +65,6 @@ def solve2(data, test=False):
             if data[yy][xx] == "^":
                 x = xx
                 y = yy
-
     for xx in range(x_l):
         for yy in range(y_l):
             if data[yy][xx] == ".":
