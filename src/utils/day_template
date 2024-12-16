@@ -1,28 +1,46 @@
-from collections import Counter
+from sys import argv
+from utils.utils import *
 from aocd import get_data
+from collections import Counter, defaultdict
+from itertools import combinations, permutations, product, combinations_with_replacement
+
 
 def solve(data, test=False):
     if test:
         print(data)
+    total = 0
+    #y_l, x_l = len(data), len(data[0])
+
+
+    print_c(total)
 
 
 def solve2(data, test=False):
     if test:
         print(data)
+    total = 0
 
 
-def read_file():
-    data = []
-    with open('../data/{{day}}.in', 'r') as f:
-        return [list(l.split())for l in f.readlines()]
+
+    print_c(total)
+
+
+def parse_data(indata = None):
+    if not indata:
+        indata = open('data/{{day}}.in', 'r')
+    return [l.strip() for l in indata]
 
 
 if __name__ == '__main__':
-    data = read_file()
-    print("Testing data: ")
-    solve(data, test=True)
-    solve2(data, test=True)
-    data_real = get_data(day={{day}}, year=2024)
-    print("Real data: ")
-    solve(data)
-    solve2(data)
+    data = parse_data()
+    data_real = parse_data(get_data(day={{day}}, year=2024).splitlines(True))
+    if len(argv) < 2 or argv[1] != '2':
+        print("Part1 test:")
+        solve(data, test=True)
+        print("Part1: ")
+        solve(data_real)
+    else:
+        print("Part2 test:")
+        solve2(data, test=True)
+        print("Part2: ")
+        solve2(data_real)
