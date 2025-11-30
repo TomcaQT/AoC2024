@@ -1,28 +1,37 @@
 from sys import argv
 from utils.utils import *
-from aocd import get_data
+from aocd import get_data, submit
 from collections import Counter, defaultdict
 from itertools import combinations, permutations, product, combinations_with_replacement
 
 
-def solve(data, test=False):
+DAY, YEAR = {{day}}, 2025
+
+def solve(data, test=False, autosubmit=False):
     if test:
         print(data)
+        autosubmit = False
     total = 0
     #y_l, x_l = len(data), len(data[0])
+    print(data)
 
 
     print_c(total)
+    if autosubmit:
+        submit(total,part="a", day=DAY, year=YEAR)
 
 
-def solve2(data, test=False):
+def solve2(data, test=False, autosubmit=False):
     if test:
         print(data)
+        autosubmit = False
     total = 0
 
 
 
     print_c(total)
+    if autosubmit:
+        submit(total,part="a", day=DAY, year=YEAR)
 
 
 def parse_data(indata = None):
@@ -33,14 +42,17 @@ def parse_data(indata = None):
 
 if __name__ == '__main__':
     data = parse_data()
-    data_real = parse_data(get_data(day={{day}}, year=2024).splitlines(True))
+    data_real = parse_data(get_data(day=DAY, year=YEAR).splitlines(True))
+
+    autosubmit = len(argv) >= 3 and argv[2] == 's'
+
     if len(argv) < 2 or argv[1] != '2':
         print("Part1 test:")
         solve(data, test=True)
         print("Part1: ")
-        solve(data_real)
+        solve(data_real, autosubmit=autosubmit)
     else:
         print("Part2 test:")
         solve2(data, test=True)
         print("Part2: ")
-        solve2(data_real)
+        solve2(data_real, autosubmit=autosubmit)
