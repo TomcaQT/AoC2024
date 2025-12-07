@@ -5,14 +5,23 @@ from collections import Counter, defaultdict
 from itertools import combinations, permutations, product, combinations_with_replacement
 
 
-DAY, YEAR = {{day}}, 2025
+DAY, YEAR = 1, 2025
 
 def solve(data, test=False, autosubmit=False):
     if test:
         print(data)
         autosubmit = False
     total = 0
-    #y_l, x_l = len(data), len(data[0])
+    pos = 50
+    for line in data:
+        step = int(line[1:])
+        dir = -1 if line[0] == 'L' else 1
+
+        pos += (step * dir)
+        pos %= 100
+        if pos == 0:
+            total += 1
+        #print(pos)
 
 
     print_c(total)
@@ -25,17 +34,40 @@ def solve2(data, test=False, autosubmit=False):
         print(data)
         autosubmit = False
     total = 0
-
-
+    pos = 50
+    prev_pos = -1
+    for line in data:
+        step = int(line[1:])
+        dir = -1 if line[0] == 'L' else 1
+        print(f"Befor step:{step} pos:{pos}, total:{total}")
+        total += step // 100
+        step %= 100
+        prev_pos = pos
+        pos += step * dir
+        #print(pos)
+        if step == 0:
+            continue
+        if pos == 0 or pos == 100:
+          pos = 0
+          total += 1
+        elif pos > 100:
+            total += 1
+            pos = pos - 100
+        elif pos < 0:
+            if prev_pos != 0:
+                total += 1
+            pos = 100 + pos
+        print(f"After step:{step} pos:{pos}, total:{total}")
+        print("====")
 
     print_c(total)
     if autosubmit:
-        submit(total,part="b", day=DAY, year=YEAR)
+        submit(total,part="a", day=DAY, year=YEAR)
 
 
 def parse_data(indata = None):
     if not indata:
-        indata = open('data/{{day}}.in', 'r')
+        indata = open('data/1.in', 'r')
     return [l.strip() for l in indata]
 
 
